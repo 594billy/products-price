@@ -17,7 +17,7 @@ while True:
     price = input('請輸入價格：')
     products.append([product, price])
 
-#印出所有字料
+#印出所有資料
 for each in products:
     print(each[0], '的價格是', each[1])
 
