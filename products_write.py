@@ -3,18 +3,13 @@ import os #operating system
 #讀取檔案
 def read_file(filename):
     products = []
-    if os.path.isfile(filename):
-        print('已讀取檔案')
-        with open(filename, 'r', encoding = 'utf-8-sig') as f:
-            for line in f:
-                if '商品,價格' in line:
-                    continue
-                else:
-                    product, price = line.strip().split(',')
-                    products.append([product, price])
-        print(products) 
-    else:
-        print('無紀錄')
+    with open(filename, 'r', encoding = 'utf-8-sig') as f:
+        for line in f:
+            if '商品,價格' in line:
+                continue
+            else:
+                product, price = line.strip().split(',')
+                products.append([product, price])      
     return products
 
 
@@ -41,7 +36,17 @@ def write_file(filename, products):
             f.write(each[0] + ',' + each[1] + '\n')
 
 
-products = read_file('product.csv')
-products = user_input(products)
-print_products(products)
-write_file('product.csv', products)
+def main():
+    filename = 'product.csv'
+    if os.path.isfile(filename):
+        print('已讀取檔案')
+        products = read_file(filename)
+    else:
+        print('無紀錄')
+        products = []
+    
+    products = user_input(products)
+    print_products(products)
+    write_file('product.csv', products)
+
+main()
